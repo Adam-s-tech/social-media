@@ -132,6 +132,32 @@ Allez sur `/videos` → parcourez les vidéos analysées avec leurs concepts gé
 
 ---
 
+## 💰 Coût & Test minimal
+
+> ⚠️ **Ce projet n'est pas gratuit.** Chaque lancement du pipeline consomme des crédits sur 3 services payants.
+
+| Service | Niveau gratuit | Au-delà |
+|---|---|---|
+| **Apify** | ~5 $ de crédits offerts | Selon votre plan |
+| **Google Gemini** | Quota quotidien limité | Tier payant requis pour gros volumes |
+| **Anthropic Claude** | Aucun niveau gratuit | Selon consommation de tokens |
+
+### Pour tester sans exploser votre budget
+
+Commencez avec la configuration la plus légère possible :
+
+- **Créateurs** : 1 seul compte
+- **Max videos per creator** : 3 (le minimum)
+- **Top K** : 1 (analyser seulement la vidéo la plus virale)
+- **Days lookback** : 7
+
+Un tel test coûte quelques centimes. Une fois que tout fonctionne, augmentez progressivement les paramètres.
+
+> ❌ Erreur `RESOURCE_EXHAUSTED` (Gemini) ou "credit balance too low" (Anthropic) ?
+> → Consultez [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+
+---
+
 ## Structure du projet
 
 ```
@@ -175,6 +201,37 @@ Problèmes courants :
 - ❌ Variables d'environnement manquantes → vérifiez que `.env` est à la **racine** du projet
 - ❌ Erreur `ENOENT data/*.csv` → les fichiers CSV sont créés automatiquement au premier lancement
 - ❌ Quota Apify épuisé → vérifiez votre plan sur [console.apify.com](https://console.apify.com)
+
+---
+
+## ❓ FAQ / Problèmes fréquents
+
+### « `cr`, `cs` ou `claude` : command not found »
+
+Ce repo **n'utilise pas** les alias `cr`/`cs` ni la CLI `claude` pour démarrer. Ces commandes appartiennent à d'autres configurations ou tutoriels. Si vous les voyez dans une vidéo, elles ne concernent pas ce projet.
+
+La **seule commande nécessaire** pour lancer l'application est :
+
+```bash
+cd app && npm install && npm run dev
+```
+
+Si vous obtenez `zsh: command not found: claude` ou similaire, ignorez-le — cette CLI n'est pas requise ici.
+
+### « Je ne trouve pas le fichier `.env` »
+
+Le fichier `.env` **n'est pas inclus dans le dépôt GitHub** (il est volontairement ignoré par Git pour ne pas exposer vos clés API). C'est normal de ne pas le voir.
+
+Créez-le vous-même en une commande :
+
+```bash
+# Depuis la racine du projet (là où se trouve README.md)
+cp .env.example .env
+```
+
+Ouvrez ensuite `.env` et remplacez les valeurs fictives par vos vraies clés API.
+
+> 📖 Guide complet → [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
 
 ---
 
@@ -328,6 +385,32 @@ Go to `/videos` → browse analysed videos with generated concepts.
 
 ---
 
+## 💰 Cost & Minimal Test
+
+> ⚠️ **This project is not free.** Every pipeline run consumes credits across 3 paid services.
+
+| Service | Free tier | Beyond |
+|---|---|---|
+| **Apify** | ~$5 of free credits | According to your plan |
+| **Google Gemini** | Limited daily quota | Paid tier required for large volumes |
+| **Anthropic Claude** | No free tier | According to token usage |
+
+### To test without blowing your budget
+
+Start with the lightest possible configuration:
+
+- **Creators**: 1 account only
+- **Max videos per creator**: 3 (the minimum)
+- **Top K**: 1 (analyse only the most viral video)
+- **Days lookback**: 7
+
+Such a test costs a few cents. Once everything works, gradually increase the parameters.
+
+> ❌ `RESOURCE_EXHAUSTED` error (Gemini) or "credit balance too low" (Anthropic)?
+> → See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+
+---
+
 ## Project Structure
 
 ```
@@ -371,6 +454,37 @@ Common problems:
 - ❌ Missing environment variables → make sure `.env` is at the **project root**
 - ❌ `ENOENT data/*.csv` error → CSV files are created automatically on first run
 - ❌ Apify quota exceeded → check your plan at [console.apify.com](https://console.apify.com)
+
+---
+
+## ❓ FAQ / Quick fixes
+
+### "`cr`, `cs` or `claude`: command not found"
+
+This repo does **not** use the `cr`/`cs` aliases or the `claude` CLI to start. These commands belong to other configurations or tutorials. If you see them in a video, they do not apply to this project.
+
+The **only command needed** to start the app is:
+
+```bash
+cd app && npm install && npm run dev
+```
+
+If you get `zsh: command not found: claude` or similar, ignore it — this CLI is not required here.
+
+### "I can't find the `.env` file"
+
+The `.env` file is **not included in the GitHub repository** (it is intentionally ignored by Git so your API keys are never exposed). It is normal not to see it.
+
+Create it yourself with one command:
+
+```bash
+# From the project root (where README.md lives)
+cp .env.example .env
+```
+
+Then open `.env` and replace the placeholder values with your real API keys.
+
+> 📖 Full guide → [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
 
 ---
 
