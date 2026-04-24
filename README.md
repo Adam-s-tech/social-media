@@ -16,7 +16,7 @@ Forké depuis [melnikoff-oleg/social-media](https://github.com/melnikoff-oleg/so
 2. 📊 **Filtrage & Ranking** — identifie automatiquement les vidéos les plus virales
 3. 🧠 **Analyse IA** — Google Gemini 2.0 Flash décompose chaque vidéo (concept, hook, rétention, récompense, script)
 4. ✍️ **Génération de concepts** — Anthropic Claude Sonnet adapte les formules virales à votre marque
-5. 💾 **Stockage & Consultation** — résultats sauvegardés en CSV, consultables dans l'interface
+5. 💾 **Stockage & Consultation** — résultats sauvegardés en CSV (format tableur), consultables dans l'interface
 
 **Stack** : Next.js 16 · TypeScript · Tailwind CSS · Apify · Google Gemini · Anthropic Claude
 
@@ -117,12 +117,13 @@ Allez sur `/creators` → ajoutez les comptes Instagram à analyser (ex: `@nateh
 ### Étape 2 — Créer une configuration
 
 Allez sur `/configs` → créez une config avec :
-- un prompt d'analyse (comment Gemini doit analyser)
-- un prompt de génération (comment Claude doit adapter pour votre marque)
+- un prompt d'analyse (instruction texte pour Gemini)
+- un prompt de génération (instruction texte pour Claude)
 
 ### Étape 3 — Lancer le pipeline
 
 Allez sur `/run` → sélectionnez votre config, définissez les paramètres et lancez.
+Paramètres clés : Top-K (combien de vidéos virales garder) et Days lookback (fenêtre en jours).
 
 ### Étape 4 — Consulter les résultats
 
@@ -148,8 +149,8 @@ Commencez avec la configuration la plus légère possible :
 
 - **Créateurs** : 1 seul compte
 - **Max videos per creator** : 3 (le minimum)
-- **Top K** : 1 (analyser seulement la vidéo la plus virale)
-- **Days lookback** : 7
+- **Top K** : 1 (Top-K = combien de vidéos virales garder)
+- **Days lookback** : 7 (lookback = fenêtre en jours)
 
 Un tel test coûte quelques centimes. Une fois que tout fonctionne, augmentez progressivement les paramètres.
 
@@ -197,10 +198,9 @@ Un tel test coûte quelques centimes. Une fois que tout fonctionne, augmentez pr
 
 Problème fréquent ? Consultez [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 
-Problèmes courants :
+Points rapides :
 - ❌ Variables d'environnement manquantes → vérifiez que `.env` est à la **racine** du projet
 - ❌ Erreur `ENOENT data/*.csv` → les fichiers CSV sont créés automatiquement au premier lancement
-- ❌ Quota Apify épuisé → vérifiez votre plan sur [console.apify.com](https://console.apify.com)
 
 ---
 
@@ -269,7 +269,7 @@ Forked from [melnikoff-oleg/social-media](https://github.com/melnikoff-oleg/soci
 2. 📊 **Filtering & Ranking** — automatically identifies the most viral videos
 3. 🧠 **AI Analysis** — Google Gemini 2.0 Flash breaks down each video (concept, hook, retention, reward, script)
 4. ✍️ **Concept Generation** — Anthropic Claude Sonnet adapts viral formulas to your brand
-5. 💾 **Storage & Review** — results saved to CSV, viewable in the UI
+5. 💾 **Storage & Review** — results saved to CSV (spreadsheet format), viewable in the UI
 
 **Stack**: Next.js 16 · TypeScript · Tailwind CSS · Apify · Google Gemini · Anthropic Claude
 
@@ -370,12 +370,13 @@ Go to `/creators` → add Instagram accounts to analyse (e.g. `@nateherk`, `@leo
 ### Step 2 — Create a configuration
 
 Go to `/configs` → create a config with:
-- an analysis prompt (how Gemini should analyse)
-- a generation prompt (how Claude should adapt for your brand)
+- an analysis prompt (plain-text instruction for Gemini)
+- a generation prompt (plain-text instruction for Claude)
 
 ### Step 3 — Run the pipeline
 
 Go to `/run` → select your config, set parameters and launch.
+Key parameters: Top-K (how many viral videos to keep) and Days lookback (day window).
 
 ### Step 4 — Review results
 
@@ -401,8 +402,8 @@ Start with the lightest possible configuration:
 
 - **Creators**: 1 account only
 - **Max videos per creator**: 3 (the minimum)
-- **Top K**: 1 (analyse only the most viral video)
-- **Days lookback**: 7
+- **Top K**: 1 (Top-K = how many viral videos to keep)
+- **Days lookback**: 7 (lookback = day window)
 
 Such a test costs a few cents. Once everything works, gradually increase the parameters.
 
@@ -448,12 +449,11 @@ Such a test costs a few cents. Once everything works, gradually increase the par
 
 ## Troubleshooting
 
-Check [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for common issues.
+Check [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for the full list.
 
-Common problems:
+Quick checks:
 - ❌ Missing environment variables → make sure `.env` is at the **project root**
 - ❌ `ENOENT data/*.csv` error → CSV files are created automatically on first run
-- ❌ Apify quota exceeded → check your plan at [console.apify.com](https://console.apify.com)
 
 ---
 
